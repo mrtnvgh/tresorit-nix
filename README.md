@@ -27,7 +27,7 @@ behaviour of the official installer.
 ## Try it
 
 ```sh
-NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:<you>/tresorit-nix
+NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:mrtnvgh/tresorit-nix
 ```
 
 ## Use as a flake input
