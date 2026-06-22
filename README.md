@@ -35,9 +35,11 @@ NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:<you>/tresorit-nix
 ```nix
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    tresorit-nix.url = "github:<you>/tresorit-nix";
-    tresorit-nix.inputs.nixpkgs.follows = "nixpkgs";
+    # ..
+    tresorit-nix = {
+      url = "github:mrtnvgh/tresorit-nix";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
   };
 
   outputs = { nixpkgs, tresorit-nix, ... }:

@@ -14,14 +14,9 @@
   libx11,
   libxext,
   libxcb,
-  # Hyphenated attrs can't be function parameters; pulled from `pkgs` below.
   pkgs,
 }:
 
-# Self-extracting `.run` installer (shell stub + gzipped tar at line 93). Qt is
-# statically linked, so only the X11/XCB/GL stack is needed (via autoPatchelf).
-# The unversioned URL always serves the latest build, so `hash` must be bumped
-# on each new release.
 stdenv.mkDerivation (finalAttrs: {
   pname = "tresorit";
   version = "3.5.1281.4700";
@@ -31,27 +26,25 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-6PGp83mFSJSlBmycKyIYS+kU9lZpVWZ8FZccukdjyUM=";
   };
 
+  # Qt is statically linked, so only the X11/XCB/GL stack is needed (via autoPatchelf)
   nativeBuildInputs = [
     autoPatchelfHook
     copyDesktopItems
   ];
 
   buildInputs = [
-    (lib.getLib stdenv.cc.cc) # libgcc_s / libstdc++
+    (lib.getLib stdenv.cc.cc)
     libGL
-    libxkbcommon # provides libxkbcommon.so + libxkbcommon-x11.so
+    libxkbcommon
     libx11
     libxext
     libxcb
     pkgs."libxcb-image"
     pkgs."libxcb-keysyms"
     pkgs."libxcb-render-util"
-    pkgs."libxcb-wm" # libxcb-icccm / libxcb-ewmh
+    pkgs."libxcb-wm"
   ];
 
-  # dlopen'd at runtime, so appended to RUNPATH: libxcb-cursor by the Qt xcb
-  # plugin; fuse/fuse3 by the daemon for Tresorit Drive (the setuid fusermount
-  # helper comes from the host). getLib: fuse's default output is `bin`.
   runtimeDependencies = [
     pkgs."libxcb-cursor"
     (lib.getLib fuse)
