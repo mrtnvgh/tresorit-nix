@@ -14,7 +14,11 @@
   libx11,
   libxext,
   libxcb,
-  pkgs,
+  libxcb-image,
+  libxcb-keysyms,
+  libxcb-render-util,
+  libxcb-wm,
+  libxcb-cursor,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -39,14 +43,14 @@ stdenv.mkDerivation (finalAttrs: {
     libx11
     libxext
     libxcb
-    pkgs."libxcb-image"
-    pkgs."libxcb-keysyms"
-    pkgs."libxcb-render-util"
-    pkgs."libxcb-wm"
+    libxcb-image
+    libxcb-keysyms
+    libxcb-render-util
+    libxcb-wm
   ];
 
   runtimeDependencies = [
-    pkgs."libxcb-cursor"
+    libxcb-cursor
     (lib.getLib fuse)
     (lib.getLib fuse3)
   ];
