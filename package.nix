@@ -23,11 +23,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "tresorit";
-  version = "3.5.1281.4700";
+  version = "3.5.1300.4870";
 
   src = fetchurl {
     url = "https://installer.tresorit.com/tresorit_installer.run";
-    hash = "sha256-6PGp83mFSJSlBmycKyIYS+kU9lZpVWZ8FZccukdjyUM=";
+    hash = "sha256-8w8wuso3HMF0ME/xU8S6kM3zndIMjPUN765geIBK/HY=";
   };
 
   # Qt is statically linked, so only the X11/XCB/GL stack is needed (via autoPatchelf)
